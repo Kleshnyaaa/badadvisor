@@ -7,7 +7,7 @@ param resourcePostfix string
 
 resource storageAccount 'Microsoft.Storage/storageAccounts@2021-06-01' = {
   name: 'sabadadvisor${environment}${resourcePostfix}'
-  location: 'eastus'
+  location: resourceGroup().location
   sku: {
     name: 'Standard_LRS'
   }

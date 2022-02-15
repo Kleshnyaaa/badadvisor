@@ -15,5 +15,5 @@ jobs:
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
           resourceGroupName: rg-badadvisor-dev
           template: ./infrastructure/main.bicep
-          parameters: environment=dev resourcePostfix=kkh
+          parameters: environment=dev resourcePostfix=kkhh
           failOnStdErr: false

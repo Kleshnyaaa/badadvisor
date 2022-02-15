@@ -9,7 +9,7 @@ namespace BadAdvisor.Mvc.Controllers
     [Route("messages")]
     public class MessagesController : Controller
     {
-        private static Random _rand = new (DateTime.UtcNow.Millisecond);
+        private static Random _rand = new Random(DateTime.UtcNow.Millisecond);
         private readonly IMessagesRepository _messagesRepository;
 
         public MessagesController(IMessagesRepository messagesRepository)

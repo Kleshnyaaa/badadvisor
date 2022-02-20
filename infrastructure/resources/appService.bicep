@@ -28,6 +28,13 @@ resource appService 'Microsoft.Web/sites@2021-02-01' = {
     siteConfig: {
       linuxFxVersion: 'DOTNETCORE|5.0'
       alwaysOn: true
+      connectionStrings:[
+        {
+          name: 'test-conn-string'
+          type: 'SQLServer'
+          connectionString: 'bla-bla-bla'
+        }
+      ]
 
       appSettings:[
         {

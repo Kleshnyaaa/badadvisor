@@ -2,13 +2,13 @@
   'dev'
   'prod'
 ])
-param environment string
+param environmentTier string
 param resourcePostfix string
 param connectionString string
 param location string
 
 resource plan 'Microsoft.Web/serverfarms@2021-02-01' = {
-  name: 'plan-badadvisor-${environment}-${resourcePostfix}'
+  name: 'plan-badadvisor-${environmentTier}-${resourcePostfix}'
   location: location
   sku: {
     tier: 'Standard'
@@ -22,7 +22,7 @@ resource plan 'Microsoft.Web/serverfarms@2021-02-01' = {
 }
 
 resource appService 'Microsoft.Web/sites@2021-02-01' = {
-  name: 'appservice-badadvisor-${environment}-${resourcePostfix}'
+  name: 'appservice-badadvisor-${environmentTier}-${resourcePostfix}'
   location: location
   properties: {
     serverFarmId: plan.id
@@ -40,7 +40,7 @@ resource appConfiguration 'Microsoft.Web/sites/config@2021-03-01' = {
   properties: {
     appSettings: [
       {
-        name: 'test-key'
+        name: 'StorageConnectionString'
         value: connectionString
       }
     ]

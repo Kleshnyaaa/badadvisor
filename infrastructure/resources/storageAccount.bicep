@@ -4,10 +4,11 @@
 ])
 param environmentTier string
 param resourcePostfix string
+param location string
 
 resource storageAccount 'Microsoft.Storage/storageAccounts@2021-06-01' = {
   name: 'sabadadvisor${environmentTier}${resourcePostfix}'
-  location: resourceGroup().location
+  location: location
   sku: {
     name: 'Standard_LRS'
   }
@@ -18,4 +19,4 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2021-06-01' = {
 }
 
 var storageAccountFirstKey = storageAccount.listKeys().keys[0]
-output connectionString string = 'DefaultEndpointsProtocol=https;AccountName=${storageAccountFirstKey.keyName};AccountKey=${storageAccountFirstKey.value};EndpointSuffix=${environment().suffixes.storage}'
+output connectionString string = 'DefaultEndpointsProtocol=https;AccountName=${storageAccount.name};AccountKey=${storageAccountFirstKey.value};EndpointSuffix=${environment().suffixes.storage}'

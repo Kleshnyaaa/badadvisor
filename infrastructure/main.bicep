@@ -8,6 +8,7 @@ module storageAccount 'resources/storageAccount.bicep' = {
   params: {
     environmentTier: environment
     resourcePostfix: resourcePostfix
+    location: location
   }
 }
 

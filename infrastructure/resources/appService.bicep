@@ -28,20 +28,19 @@ resource appService 'Microsoft.Web/sites@2021-02-01' = {
     siteConfig: {
       linuxFxVersion: 'DOTNETCORE|5.0'
       alwaysOn: true
-      connectionStrings:[
-        {
-          name: 'test-conn-string'
-          type: 'SQLServer'
-          connectionString: 'bla-bla-bla'
-        }
-      ]
-
-      appSettings:[
-        {
-          name: 'test-prop'
-          value: 'test-value'
-        }
-      ]
     }
+  }
+}
+
+resource appConfiguration 'Microsoft.Web/sites/config@2021-03-01' = {
+  name: 'web'
+  parent: appService
+  properties: {
+    appSettings: [
+      {
+        name: 'test-key'
+        value: 'test-value'
+      }
+    ]
   }
 }

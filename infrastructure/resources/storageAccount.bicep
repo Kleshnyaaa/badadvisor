@@ -17,4 +17,4 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2021-06-01' = {
   }
 }
 
-output connectionString string = 'test-output-value'
+output connectionString string = storageAccount.listKeys().keys[0].value

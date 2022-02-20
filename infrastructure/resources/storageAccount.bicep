@@ -16,3 +16,5 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2021-06-01' = {
     accessTier: 'Hot'
   }
 }
+
+output connectionString string = 'test-output-value'

@@ -28,6 +28,13 @@ resource appService 'Microsoft.Web/sites@2021-02-01' = {
     siteConfig: {
       linuxFxVersion: 'DOTNETCORE|5.0'
       alwaysOn: true
+
+      appSettings:[
+        {
+          name: 'test-prop'
+          value: 'test-value'
+        }
+      ]
     }
   }
 }

@@ -7,6 +7,7 @@ param resourcePostfix string
 param connectionString string
 param location string
 param vnetName string
+param subnetId string
 
 resource plan 'Microsoft.Web/serverfarms@2021-02-01' = {
   name: 'plan-badadvisor-${environmentTier}-${resourcePostfix}'
@@ -34,6 +35,7 @@ resource appService 'Microsoft.Web/sites@2021-02-01' = {
       vnetName: vnetName
       vnetRouteAllEnabled: true
     }
+    virtualNetworkSubnetId: subnetId
   }
   identity: {
     type: 'SystemAssigned'

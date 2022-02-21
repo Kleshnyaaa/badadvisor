@@ -31,5 +31,6 @@ module appService 'resources/appService.bicep' = {
     location: location
     connectionString: connectionString
     vnetName: virtualNetwork.outputs.vnetName
+    subnetId: virtualNetwork.outputs.subnetId
   }
 }

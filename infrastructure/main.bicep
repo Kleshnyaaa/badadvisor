@@ -1,7 +1,7 @@
 param environment string 
 param resourcePostfix string
 
-var location = resourceGroup().location
+param location string = resourceGroup().location
 
 module storageAccount 'resources/storageAccount.bicep' = {
   name: 'storageAccount-deployment'
@@ -21,5 +21,13 @@ module appService 'resources/appService.bicep' = {
     resourcePostfix: resourcePostfix
     location: location
     connectionString: connectionString
+  }
+}
+
+module virtualNetwork 'resources/vnet.bicep' = {
+  name: 'vNet'
+  params: {
+    environment: environment
+    resourcePostfix: resourcePostfix
   }
 }

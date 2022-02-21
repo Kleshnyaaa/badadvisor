@@ -6,6 +6,7 @@ param environmentTier string
 param resourcePostfix string
 param connectionString string
 param location string
+param vnetName string
 
 resource plan 'Microsoft.Web/serverfarms@2021-02-01' = {
   name: 'plan-badadvisor-${environmentTier}-${resourcePostfix}'
@@ -30,7 +31,12 @@ resource appService 'Microsoft.Web/sites@2021-02-01' = {
     siteConfig: {
       linuxFxVersion: 'DOTNETCORE|5.0'
       alwaysOn: true
+      vnetName: vnetName
+      vnetRouteAllEnabled: true
     }
+  }
+  identity: {
+    type: 'SystemAssigned'
   }
 }
 

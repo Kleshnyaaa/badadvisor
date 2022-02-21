@@ -3,12 +3,21 @@ param resourcePostfix string
 
 param location string = resourceGroup().location
 
+module virtualNetwork 'resources/vnet.bicep' = {
+  name: 'vNet'
+  params: {
+    environment: environment
+    resourcePostfix: resourcePostfix
+  }
+}
+
 module storageAccount 'resources/storageAccount.bicep' = {
   name: 'storageAccount-deployment'
   params: {
     environmentTier: environment
     resourcePostfix: resourcePostfix
     location: location
+    subnetId: virtualNetwork.outputs.subnetId
   }
 }
 
@@ -21,13 +30,6 @@ module appService 'resources/appService.bicep' = {
     resourcePostfix: resourcePostfix
     location: location
     connectionString: connectionString
-  }
-}
-
-module virtualNetwork 'resources/vnet.bicep' = {
-  name: 'vNet'
-  params: {
-    environment: environment
-    resourcePostfix: resourcePostfix
+    vnetName: virtualNetwork.outputs.vnetName
   }
 }
